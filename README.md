@@ -1,0 +1,2 @@
+# new_django
+django
