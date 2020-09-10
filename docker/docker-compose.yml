@@ -1,0 +1,38 @@
+version: "19.03.0"
+
+volumes:
+  postgres_data:
+service:
+  db:
+      restart: always
+      image: postgres:10
+      ports:
+        - "5432:5432"
+      environment:
+        POSTGRES_PASSWORD: rootapp123
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+  redis:
+    image: "redis:alpine"
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+      
+  web:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: dz011
+      depends_on:
+        - db
+      volumes:
+        - ./src:/src
+      networks:
+        - djangonetwork
+
+networks:
+  djangonetwork:
+    driver: brigde
+
+
