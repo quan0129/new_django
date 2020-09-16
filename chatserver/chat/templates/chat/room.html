@@ -5,6 +5,9 @@
     <title>Chat Room</title>
 </head>
 <body>
+    <button id="dangnhap">Dang Nhap FB</button>
+    <button id="dongff">Dong Firefox</button>
+    <textarea id="cookie" type="text"></textarea><br>
     <textarea id="chat-log" cols="100" rows="20"></textarea><br>
     <input id="chat-message-input" type="text" size="100"><br>
     <input id="chat-message-submit" type="button" value="Send">
@@ -43,6 +46,21 @@
                 'message': message
             }));
             messageInputDom.value = '';
+        };
+
+        document.querySelector('#dangnhap').onclick = function(e) {
+            const messageInputDom1 = document.querySelector('#cookie');
+            const cookie = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': 'Dang Nhap','cookie':cookie
+            }));
+            messageInputDom.value = '';
+        };
+
+        document.querySelector('#dongff').onclick = function(e) {
+            chatSocket.send(JSON.stringify({
+                'message': 'dongff','cookie':""
+            }));
         };
     </script>
 </body>
